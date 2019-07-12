@@ -1,27 +1,30 @@
-var path = require('path');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const path = require('path');
 
-module.exports = {
+const nodeConfig = {
 	// Change to your "entry-point".
-	entry: [ './src/index' ],
+	entry: {
+		replay: './src/replay.ts',
+		record: './src/record.ts'
+	},
 	output: {
 		path: path.resolve(__dirname, 'dist'),
-		filename: 'app.bundle.js'
+		filename: '[name].js',
+		libraryTarget: 'commonjs2'
 	},
 	resolve: {
-		extensions: [ '.ts', '.tsx', '.js', '.json' ]
+		extensions: [ '.js', '.json', '.tsx', '.ts' ]
 	},
 	module: {
 		rules: [
 			{
 				// Include ts, tsx, js, and jsx files.
-				test: /\.(ts)x?$/,
-				exclude: /node_modules/,
-				loader: 'ts-loader'
-			},
-			{
-				// Include ts, tsx, js, and jsx files.
 				test: /\.(js)x?$/,
 				loader: 'babel-loader'
+			},
+			{
+				test: /\.tsx?$/,
+				use: 'ts-loader'
 			}
 		]
 	},
@@ -29,26 +32,27 @@ module.exports = {
 		// Replace these Node.js native modules with empty objects, Mongoose's
 		// browser library does not use them.
 		// See https://webpack.js.org/configuration/node/
-		fs: 'empty',
-		util: 'empty',
-		events: 'empty',
-		http: 'empty',
-		dgram: 'empty',
-		net: 'empty',
-		buffer: 'empty',
-		crypto: 'empty',
-		dns: 'empty',
-		assert: 'empty',
-		stream: 'empty',
-		os: 'empty',
-		url: 'empty',
-		querystring: 'empty',
-		tls: 'empty',
-		path: 'empty',
-		tty: 'empty',
-		module: 'empty',
-		zlib: 'empty'
+		fs: false,
+		util: false,
+		events: false,
+		http: false,
+		dgram: false,
+		net: false,
+		buffer: false,
+		crypto: false,
+		dns: false,
+		assert: false,
+		stream: false,
+		os: false,
+		url: false,
+		querystring: false,
+		tls: false,
+		path: false,
+		tty: false,
+		module: false,
+		zlib: false
 	},
 	target: 'node',
-	mode: 'production'
+	mode: 'production' //'production'
 };
+module.exports = [ nodeConfig ];

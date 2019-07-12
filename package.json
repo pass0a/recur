@@ -1,35 +1,52 @@
 {
-	"name": "@passoa/recur",
-	"version": "1.0.5",
+	"name": "@passoa/modules",
+	"version": "1.0.0",
 	"description": "",
-	"main": "lib/index.js",
-	"repository": "git+https://github.com/pass0a/recur.git",
+	"main": "index.js",
 	"scripts": {
-		"build": "webpack",
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"build": "npm run clean && webpack",
+		"clean": "rimraf dist",
+		"nyc_out": "rimraf dist && rimraf .nyc_output && mkdirp .nyc_output",
+		"pretest": "npm run nyc_out && nyc instrument test dist/test && nyc instrument src dist/src && tsc",
+		"test": "passoa node_modules/tape/bin/tape dist/test/*.test.js",
+		"posttest": "nyc report --reporter=text --reporter=html"
 	},
-	"author": "losper",
-	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/pass0a/recur/issues"
-	},
-	"homepage": "https://github.com/pass0a/recur#readme",
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	  "binary": {
+        "module_name" : "framebuffer",
+        "module_path" : "./lib/binding/{configuration}/{node_abi}-{platform}-{arch}/",
+        "remote_path" : "./poseidon/",
+        "package_name": "{module_name}-{platform}-{version}.7z",
+        "host"        : "ftp://118.24.247.135"
+    },
 	"devDependencies": {
 		"@babel/core": "^7.4.5",
 		"@babel/preset-env": "^7.4.5",
-		"@types/mongoose": "^5.5.6",
-		"@types/node": "^12.0.8",
+		"@passoa/tap": "^1.0.3",
+		"@types/mkdirp": "^0.5.2",
+		"@types/node": "^12.0.10",
+		"@types/tape": "^4.2.33",
 		"babel-loader": "^8.0.6",
+		"fs-extra": "^8.0.1",
+		"rimraf": "^2.6.3",
 		"ts-loader": "^6.0.4",
-		"tslib": "^1.10.0",
 		"typescript": "^3.5.2",
 		"webpack": "^4.35.0",
+		"webpack-bundle-analyzer": "^3.3.2",
 		"webpack-cli": "^3.3.4"
 	},
 	"dependencies": {
-		"core-js": "^3.1.4",
-		"mongoose": "^5.6.0",
-		"regenerator-runtime": "^0.13.2",
-		"supports-color": "^7.0.0"
+		"mongoose": "latest"
+	},
+	"nyc": {
+		"extension": [
+			".ts",
+			".js"
+		],
+		"exclude": [
+			"**/*.d.ts"
+		]
 	}
 }
