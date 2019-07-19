@@ -4,6 +4,7 @@ const path = require('path');
 const nodeConfig = {
 	// Change to your "entry-point".
 	entry: {
+		test: './src/index.ts',
 		replay: './src/replay.ts',
 		record: './src/record.ts'
 	},
@@ -51,6 +52,10 @@ const nodeConfig = {
 		tty: false,
 		module: false,
 		zlib: false
+	},
+	externals: {
+		'@passoa/img': '@passoa/img',
+		'@passoa/cvip': '@passoa/cvip'
 	},
 	target: 'node',
 	mode: 'production' //'production'

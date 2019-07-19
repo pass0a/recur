@@ -1,9 +1,10 @@
 {
 	"name": "@passoa/modules",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "",
 	"main": "index.js",
 	"scripts": {
+		"postinstall": "node node_modules/@passoa/pm -t msvc",
 		"build": "npm run clean && webpack",
 		"clean": "rimraf dist",
 		"nyc_out": "rimraf dist && rimraf .nyc_output && mkdirp .nyc_output",
@@ -14,39 +15,29 @@
 	"keywords": [],
 	"author": "",
 	"license": "ISC",
-	  "binary": {
-        "module_name" : "framebuffer",
-        "module_path" : "./lib/binding/{configuration}/{node_abi}-{platform}-{arch}/",
-        "remote_path" : "./poseidon/",
-        "package_name": "{module_name}-{platform}-{version}.7z",
-        "host"        : "ftp://118.24.247.135"
-    },
 	"devDependencies": {
-		"@babel/core": "^7.4.5",
-		"@babel/preset-env": "^7.4.5",
+		"@babel/core": "^7.5.4",
+		"@babel/preset-env": "^7.5.4",
+		"@passoa/pm": "^1.0.2",
 		"@passoa/tap": "^1.0.3",
 		"@types/mkdirp": "^0.5.2",
-		"@types/node": "^12.0.10",
+		"@types/node": "^12.6.3",
+		"@types/request": "^2.48.2",
 		"@types/tape": "^4.2.33",
 		"babel-loader": "^8.0.6",
-		"fs-extra": "^8.0.1",
 		"rimraf": "^2.6.3",
 		"ts-loader": "^6.0.4",
-		"typescript": "^3.5.2",
-		"webpack": "^4.35.0",
+		"typescript": "^3.5.3",
+		"webpack": "^4.35.3",
 		"webpack-bundle-analyzer": "^3.3.2",
-		"webpack-cli": "^3.3.4"
+		"webpack-cli": "^3.3.5"
 	},
 	"dependencies": {
-		"mongoose": "latest"
+		"mongoose": "latest",
+		"request": "^2.88.0"
 	},
 	"nyc": {
-		"extension": [
-			".ts",
-			".js"
-		],
-		"exclude": [
-			"**/*.d.ts"
-		]
+		"extension": [ ".ts", ".js" ],
+		"exclude": [ "**/*.d.ts" ]
 	}
 }

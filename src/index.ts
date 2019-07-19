@@ -1,32 +1,14 @@
- 
-// import * as mongoose from 'mongoose';
-// let DB_URL = 'mongodb://127.0.0.1/poseidon_data';
-// let options = { useNewUrlParser: true, ssl: false };
-// mongoose.connect(DB_URL, options, function(error) {
-// 	if (error) console.error(error);
-// 	else {
-// 		console.log('connect ok!!!');
-// 	}
+import cvip from '@passoa/cvip';
+console.log(cvip.imageMatch);
+//console.log(jpg.encode);
+// var buf = fs.readFileSync('imx6q.raw');
+// var t1 = new Date().getTime();
+// jpg.encode(buf, { width: 800, height: 480, bpp: 16, rlen: 5, glen: 6, blen: 5, ros: 11, gos: 6, bos: 0 }, function(
+// 	err: number,
+// 	data: Buffer
+// ) {
+// 	console.log('!!!!', new Date().getTime() - t1);
+// 	fs.writeFileSync('test.jpg', data);
+// 	console.log('write end');
+// 	console.log('!!!!', new Date().getTime() - t1);
 // });
-function delay(milliseconds: number, count: number): Promise<number> {
-	return new Promise<number>((resolve) => {
-		setTimeout(() => {
-			resolve(count);
-		}, milliseconds);
-	});
-}
-
-// async function always returns a Promise
-async function dramaticWelcome(): Promise<void> {
-	console.log('Hello');
-
-	for (let i = 0; i < 5; i++) {
-		// await is converting Promise<number> into number
-		const count: number = await delay(500, i);
-		console.log(count);
-	}
-
-	console.log('World!');
-}
-
-dramaticWelcome();
