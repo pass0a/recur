@@ -4,6 +4,7 @@ const path = require('path');
 const nodeConfig = {
 	// Change to your "entry-point".
 	entry: {
+		test2: './test/index.js',
 		test: './src/index.ts',
 		replay: './src/replay.ts',
 		record: './src/record.ts'
